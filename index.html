@@ -20,10 +20,8 @@
             --text-muted: #505060;
             --border: rgba(255,255,255,0.06);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
@@ -32,8 +30,6 @@
             overflow-x: hidden;
             cursor: none;
         }
-
-        /* Custom Cursor */
         .cursor {
             width: 20px; height: 20px;
             border: 2px solid var(--accent);
@@ -54,16 +50,8 @@
             transition: transform 0.08s ease;
             mix-blend-mode: difference;
         }
-        .cursor.hover {
-            width: 50px; height: 50px;
-            border-color: var(--accent-third);
-            background: rgba(255, 0, 110, 0.1);
-        }
-        .cursor-follower.hover {
-            width: 0; height: 0;
-        }
-
-        /* Scroll Progress */
+        .cursor.hover { width: 50px; height: 50px; border-color: var(--accent-third); background: rgba(255, 0, 110, 0.1); }
+        .cursor-follower.hover { width: 0; height: 0; }
         .scroll-progress {
             position: fixed;
             top: 0; left: 0;
@@ -73,8 +61,6 @@
             width: 0%;
             transition: width 0.1s ease;
         }
-
-        /* Particles Canvas */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -82,26 +68,57 @@
             z-index: 0;
             pointer-events: none;
         }
-
-        /* Navigation */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            min-width: 1300px;
+            max-width: 95%;
             z-index: 1000;
-            padding: 1.2rem 5%;
+            padding: 1rem 2rem 1rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 8, 0.7);
-            backdrop-filter: blur(30px) saturate(180%);
-            border-bottom: 1px solid var(--border);
+            background: rgba(5, 5, 8, 0.2);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
-        nav.scrolled {
-            padding: 0.8rem 5%;
-            background: rgba(5, 5, 8, 0.95);
+        .nav-left {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
         }
-
+        .nav-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+            margin-left: auto;
+            padding-left: 4rem;
+        }
+        nav.scrolled { 
+            top: 0.5rem;
+            padding: 0.8rem 4rem; 
+            background: rgba(5, 5, 8, 0.35);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
         .logo {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2rem;
@@ -117,16 +134,46 @@
             background-clip: text;
             background-size: 200% 200%;
             animation: gradientShift 3s ease infinite;
+            cursor: default;
         }
+        
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+        .nav-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+        .nav-profile-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+                        linear-gradient(135deg, var(--accent), var(--accent-secondary), var(--accent-third)) border-box;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+        .nav-profile:hover .nav-profile-img {
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+        }
+        .nav-profile-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+        .nav-profile:hover .nav-profile-name { color: var(--accent); }
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.5rem;
             list-style: none;
         }
         .nav-links a {
@@ -148,20 +195,10 @@
             background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-        .nav-links a.active {
-            color: var(--accent);
-        }
-        .nav-links a.active::before {
-            width: 100%;
-        }
-
-        /* Mobile Menu */
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::before { width: 100%; }
+        .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::before { width: 100%; }
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -170,18 +207,15 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 0 5%;
+            padding: 120px 5% 80px;
             overflow: hidden;
         }
-
         .hero-glow {
             position: absolute;
             top: 50%; left: 50%;
@@ -195,33 +229,15 @@
             0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
             50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
         }
-
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
             max-width: 1000px;
         }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.6rem 2rem;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease, borderGlow 2s ease-in-out infinite alternate;
-            background: rgba(0, 240, 255, 0.05);
-        }
-        @keyframes borderGlow {
-            from { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 0 10px rgba(0, 240, 255, 0.1); }
+        
             to { border-color: rgba(0, 240, 255, 0.6); box-shadow: 0 0 30px rgba(0, 240, 255, 0.2); }
         }
-
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(3.5rem, 10vw, 7rem);
@@ -233,10 +249,17 @@
         .hero h1 .name {
             display: block;
             color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .hero h1 .name { 
+            display: block; 
+            color: var(--text-primary); 
+            font-size: clamp(3.5rem, 10vw, 7rem);
         }
         .hero h1 .brand {
             display: block;
-            font-size: 1.2em;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-family: 'Space Grotesk', sans-serif;
             background: linear-gradient(135deg, var(--accent), var(--accent-secondary), var(--accent-third));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -244,11 +267,13 @@
             background-size: 200% 200%;
             animation: gradientShift 4s ease infinite;
             position: relative;
+            cursor: default;
+            pointer-events: none;
         }
         .hero h1 .brand::after {
             content: '';
             position: absolute;
-            bottom: -10px; left: 50%;
+            bottom: -15px; left: 50%;
             transform: translateX(-50%);
             width: 100px; height: 4px;
             background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
@@ -259,9 +284,9 @@
             from { width: 0; opacity: 0; }
             to { width: 100px; opacity: 1; }
         }
-
         .typing-container {
             min-height: 2.5rem;
+            margin-top: 1.5rem;
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease 0.6s both;
         }
@@ -281,7 +306,6 @@
             vertical-align: middle;
         }
         @keyframes blink { 50% { opacity: 0; } }
-
         .hero-desc {
             font-size: 1.15rem;
             color: var(--text-secondary);
@@ -290,15 +314,14 @@
             animation: fadeInUp 1s ease 0.9s both;
             line-height: 1.8;
         }
-
         .hero-cta {
             display: flex;
             gap: 1.2rem;
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 1s ease 1.2s both;
+            margin-bottom: 3rem;
         }
-
         .btn {
             padding: 1.1rem 2.8rem;
             border-radius: 50px;
@@ -323,17 +346,15 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s ease;
         }
-        .btn:hover::before {
-            left: 100%;
-        }
+        .btn:hover::before { left: 100%; }
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
             color: var(--bg-primary);
             box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3), 0 0 60px rgba(0, 240, 255, 0.1);
         }
         .btn-primary:hover {
-            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 20px 60px rgba(0, 240, 255, 0.4), 0 0 80px rgba(0, 240, 255, 0.15);
+            filter: brightness(1.1);
         }
         .btn-secondary {
             background: transparent;
@@ -344,56 +365,15 @@
         .btn-secondary:hover {
             border-color: var(--accent);
             color: var(--accent);
-            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
         }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            animation: fadeInUp 1s ease 1.5s both;
-            z-index: 2;
-        }
-        .scroll-indicator span {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-        .scroll-arrow {
-            width: 24px; height: 40px;
-            border: 2px solid var(--text-muted);
-            border-radius: 12px;
-            position: relative;
-        }
-        .scroll-arrow::after {
-            content: '';
-            position: absolute;
-            top: 8px; left: 50%;
-            transform: translateX(-50%);
-            width: 4px; height: 8px;
-            background: var(--accent);
-            border-radius: 2px;
-            animation: scrollBounce 2s ease infinite;
-        }
-        @keyframes scrollBounce {
-            0%, 100% { top: 8px; opacity: 1; }
+        
             50% { top: 20px; opacity: 0.3; }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Section Styles */
         section { padding: 7rem 5%; position: relative; }
         .section-header {
             text-align: center;
@@ -434,8 +414,6 @@
             font-size: 1.1rem;
             line-height: 1.8;
         }
-
-        /* About Section */
         .about { background: var(--bg-secondary); position: relative; overflow: hidden; }
         .about::before {
             content: '';
@@ -449,7 +427,6 @@
             0%, 100% { transform: translate(0, 0); }
             50% { transform: translate(-30px, 30px); }
         }
-
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -460,7 +437,6 @@
             position: relative;
             z-index: 1;
         }
-
         .about-image-wrapper {
             position: relative;
             perspective: 1000px;
@@ -516,7 +492,6 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-
         .about-content h3 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2.2rem;
@@ -532,7 +507,6 @@
             font-size: 1.05rem;
             line-height: 1.8;
         }
-
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -571,8 +545,6 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
-        /* Marquee */
         .marquee-section {
             padding: 2rem 0;
             overflow: hidden;
@@ -611,8 +583,6 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
-
-        /* Services Section */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -621,8 +591,8 @@
             margin: 0 auto;
         }
         .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: rgba(17, 17, 26, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 3rem 2.5rem;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -630,6 +600,9 @@
             overflow: hidden;
             transform-style: preserve-3d;
             perspective: 1000px;
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         .service-card::before {
             content: '';
@@ -641,9 +614,7 @@
             transform-origin: left;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
+        .service-card:hover::before { transform: scaleX(1); }
         .service-card::after {
             content: '';
             position: absolute;
@@ -653,13 +624,10 @@
             transition: opacity 0.5s ease;
             pointer-events: none;
         }
-        .service-card:hover::after {
-            opacity: 1;
-        }
+        .service-card:hover::after { opacity: 1; }
         .service-card:hover {
-            transform: translateY(-12px) rotateX(2deg);
             border-color: rgba(0, 240, 255, 0.2);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 240, 255, 0.05);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.08);
         }
         .service-icon {
             width: 70px; height: 70px;
@@ -676,8 +644,8 @@
             overflow: hidden;
         }
         .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.4);
+            filter: brightness(1.2);
         }
         .service-card h3 {
             font-family: 'Space Grotesk', sans-serif;
@@ -685,9 +653,7 @@
             margin-bottom: 1rem;
             transition: color 0.3s ease;
         }
-        .service-card:hover h3 {
-            color: var(--accent);
-        }
+        .service-card:hover h3 { color: var(--accent); }
         .service-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
@@ -703,11 +669,8 @@
             transition: all 0.4s ease;
         }
         .service-card:hover .service-number {
-            color: rgba(0, 240, 255, 0.1);
-            transform: scale(1.2);
+            color: rgba(0, 240, 255, 0.15);
         }
-
-        /* Expertise Section */
         .expertise { background: var(--bg-secondary); position: relative; }
         .expertise-grid {
             display: grid;
@@ -737,13 +700,11 @@
             transform: scaleY(0);
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .expertise-item:hover::before {
-            transform: scaleY(1);
-        }
+        .expertise-item:hover::before { transform: scaleY(1); }
         .expertise-item:hover {
-            border-color: rgba(0, 240, 255, 0.2);
-            transform: translateX(15px) scale(1.02);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: none;
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.02);
         }
         .expertise-dot {
             width: 14px; height: 14px;
@@ -762,11 +723,7 @@
             font-size: 1rem;
             transition: color 0.3s ease;
         }
-        .expertise-item:hover span {
-            color: var(--accent);
-        }
-
-        /* Contact Section */
+        .expertise-item:hover span { color: var(--accent); }
         .contact { position: relative; overflow: hidden; }
         .contact::before {
             content: '';
@@ -777,7 +734,7 @@
             animation: floatOrb 10s ease-in-out infinite reverse;
         }
         .contact-content {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             position: relative;
@@ -798,15 +755,114 @@
             font-size: 1.1rem;
             line-height: 1.8;
         }
-        .contact-links {
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        .contact-info-card {
+            background: rgba(17, 17, 26, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        .contact-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .contact-info-card:hover::before { transform: scaleX(1); }
+        .contact-info-card:hover {
+            animation: none;
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+        }
+        .contact-info-card .info-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--bg-primary);
+        }
+        .contact-info-card .info-icon svg {
+            width: 24px; height: 24px;
+            fill: currentColor;
+        }
+        .contact-info-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+        .contact-info-card a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s ease;
+            word-break: break-all;
+        }
+        .contact-info-card a:hover { color: var(--accent); }
+        .contact-info-card .badge {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .badge-whatsapp {
+            background: rgba(37, 211, 102, 0.15);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #25d366;
+        }
+        .badge-telegram {
+            background: rgba(0, 136, 204, 0.15);
+            border: 1px solid rgba(0, 136, 204, 0.3);
+            color: #0088cc;
+        }
+        .badge-call {
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--accent);
+        }
+        .whatsapp-card .info-icon {
+            background: linear-gradient(135deg, #25d366, #128c7e) !important;
+        }
+        .whatsapp-card:hover {
+            border-color: rgba(37, 211, 102, 0.3) !important;
+            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.15) !important;
+        }
+        .whatsapp-card::before {
+            background: linear-gradient(90deg, #25d366, #128c7e) !important;
+        }
+        .social-links-bar {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 3.5rem;
         }
-        .contact-link {
-            padding: 1rem 2rem;
+        .social-link {
+            padding: 1rem 1.8rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 50px;
@@ -821,24 +877,38 @@
             position: relative;
             overflow: hidden;
         }
-        .contact-link::before {
+        .social-link svg {
+            width: 20px; height: 20px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+        .social-link:hover svg { transform: scale(1.2); }
+        .social-link::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: -1;
         }
-        .contact-link:hover::before {
-            opacity: 1;
+        .social-link:hover::before { opacity: 1; }
+        .social-link:hover {
+            animation: none;
         }
-        .contact-link:hover {
-            border-color: transparent;
-            color: var(--bg-primary);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
-        }
+        .social-link.instagram::before { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-link.instagram:hover { box-shadow: 0 15px 40px rgba(225, 48, 108, 0.3); }
+        .social-link.facebook::before { background: linear-gradient(135deg, #1877f2, #4267B2); }
+        .social-link.facebook:hover { box-shadow: 0 15px 40px rgba(24, 119, 242, 0.3); }
+        .social-link.tiktok::before { background: linear-gradient(135deg, #ff0050, #00f2ea); }
+        .social-link.tiktok:hover { box-shadow: 0 15px 40px rgba(255, 0, 80, 0.3); }
+        .social-link.whatsapp::before { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .social-link.whatsapp:hover { box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3); }
+        .social-link.email::before { background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); }
+        .social-link.email:hover { box-shadow: 0 15px 40px rgba(0, 240, 255, 0.3); }
+        .social-link.phone::before { background: linear-gradient(135deg, #00f0ff, #7000ff); }
+        .social-link.phone:hover { box-shadow: 0 15px 40px rgba(0, 240, 255, 0.3); }
+        .social-link.telegram::before { background: linear-gradient(135deg, #0088cc, #229ed9); }
+        .social-link.telegram:hover { box-shadow: 0 15px 40px rgba(0, 136, 204, 0.3); }
         .contact-form {
             display: grid;
             gap: 1.5rem;
@@ -872,14 +942,11 @@
         .form-group textarea:focus {
             border-color: var(--accent);
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.02);
-            transform: translateY(-2px);
         }
         .form-group textarea {
             resize: vertical;
             min-height: 150px;
         }
-
-        /* Footer */
         footer {
             background: var(--bg-primary);
             border-top: 1px solid var(--border);
@@ -912,11 +979,10 @@
             background-size: 200% 200%;
             animation: gradientShift 4s ease infinite;
             margin-bottom: 0.5rem;
+            cursor: default;
         }
-        footer p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        
+        footer p { color: var(--text-muted); font-size: 0.9rem; }
         footer .footer-links {
             display: flex;
             justify-content: center;
@@ -929,14 +995,12 @@
             font-size: 0.85rem;
             transition: color 0.3s ease;
         }
-        footer .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        /* Responsive */
+        footer .footer-links a:hover { color: var(--accent); }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
+            .nav-profile-name { display: none; }
+            .nav-profile { position: static; transform: none; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
             .stats { grid-template-columns: 1fr; gap: 1.5rem; }
             .stat-item::after { display: none; }
@@ -946,9 +1010,10 @@
             .btn { width: 100%; justify-content: center; }
             .cursor, .cursor-follower { display: none; }
             body { cursor: auto; }
+            .contact-info-grid { grid-template-columns: 1fr; }
+            .social-links-bar { flex-direction: column; align-items: center; }
+            .social-link { width: 100%; justify-content: center; }
         }
-
-        /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -963,38 +1028,248 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
         .reveal-delay-5 { transition-delay: 0.5s; }
+    
+        /* ===== ENHANCED CARD ANIMATIONS ===== */
+
+        /* Service Cards - Varied Shapes */
+        .service-card:nth-child(1) {
+            border-radius: 24px 8px 24px 8px;
+        }
+        .service-card:nth-child(2) {
+            border-radius: 8px 24px 8px 24px;
+        }
+        .service-card:nth-child(3) {
+            border-radius: 32px 32px 8px 8px;
+        }
+        .service-card:nth-child(4) {
+            border-radius: 8px 8px 32px 32px;
+        }
+        .service-card:nth-child(5) {
+            border-radius: 16px 40px 16px 40px;
+        }
+        .service-card:nth-child(6) {
+            border-radius: 40px 16px 40px 16px;
+        }
+
+        /* Service Card Hover Animations */
+        .service-card {
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+        .service-card:nth-child(1) { animation-delay: 0s; }
+        .service-card:nth-child(2) { animation-delay: 1s; }
+        .service-card:nth-child(3) { animation-delay: 2s; }
+        .service-card:nth-child(4) { animation-delay: 3s; }
+        .service-card:nth-child(5) { animation-delay: 4s; }
+        .service-card:nth-child(6) { animation-delay: 5s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .service-card:hover {
+            animation: none;
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.15), inset 0 0 30px rgba(0, 240, 255, 0.03);
+        }
+
+        .service-card:hover .service-icon {
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.4);
+            filter: brightness(1.2);
+        }
+
+        .service-card:hover .service-number {
+            color: rgba(0, 240, 255, 0.15);
+        }
+
+        /* Expertise Items - Varied Shapes */
+        .expertise-item:nth-child(1) {
+            border-radius: 16px 4px 16px 4px;
+        }
+        .expertise-item:nth-child(2) {
+            border-radius: 4px 16px 4px 16px;
+        }
+        .expertise-item:nth-child(3) {
+            border-radius: 20px 20px 4px 4px;
+        }
+        .expertise-item:nth-child(4) {
+            border-radius: 4px 4px 20px 20px;
+        }
+        .expertise-item:nth-child(5) {
+            border-radius: 12px 28px 12px 28px;
+        }
+        .expertise-item:nth-child(6) {
+            border-radius: 28px 12px 28px 12px;
+        }
+        .expertise-item:nth-child(7) {
+            border-radius: 8px 24px 8px 24px;
+        }
+        .expertise-item:nth-child(8) {
+            border-radius: 24px 8px 24px 8px;
+        }
+        .expertise-item:nth-child(9) {
+            border-radius: 16px 16px 4px 4px;
+        }
+        .expertise-item:nth-child(10) {
+            border-radius: 4px 4px 16px 16px;
+        }
+        .expertise-item:nth-child(11) {
+            border-radius: 20px 8px 20px 8px;
+        }
+        .expertise-item:nth-child(12) {
+            border-radius: 8px 20px 8px 20px;
+        }
+
+        /* Expertise Item Animations */
+        .expertise-item {
+            animation: expertisePulse 4s ease-in-out infinite;
+        }
+        .expertise-item:nth-child(1) { animation-delay: 0s; }
+        .expertise-item:nth-child(2) { animation-delay: 0.3s; }
+        .expertise-item:nth-child(3) { animation-delay: 0.6s; }
+        .expertise-item:nth-child(4) { animation-delay: 0.9s; }
+        .expertise-item:nth-child(5) { animation-delay: 1.2s; }
+        .expertise-item:nth-child(6) { animation-delay: 1.5s; }
+        .expertise-item:nth-child(7) { animation-delay: 1.8s; }
+        .expertise-item:nth-child(8) { animation-delay: 2.1s; }
+        .expertise-item:nth-child(9) { animation-delay: 2.4s; }
+        .expertise-item:nth-child(10) { animation-delay: 2.7s; }
+        .expertise-item:nth-child(11) { animation-delay: 3.0s; }
+        .expertise-item:nth-child(12) { animation-delay: 3.3s; }
+
+        @keyframes expertisePulse {
+            0%, 100% { 
+                transform: translateX(0);
+                box-shadow: none;
+            }
+            50% { 
+                transform: translateX(5px);
+                box-shadow: -5px 0 20px rgba(0, 240, 255, 0.05);
+            }
+        }
+
+        .expertise-item:hover {
+            animation: none;
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.02);
+        }
+
+        .expertise-item:hover .expertise-dot {
+            box-shadow: 0 0 30px var(--accent), 0 0 60px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Contact Info Cards - Varied Shapes */
+        .contact-info-card:nth-child(1) {
+            border-radius: 20px 6px 20px 6px;
+        }
+        .contact-info-card:nth-child(2) {
+            border-radius: 6px 20px 6px 20px;
+        }
+        .contact-info-card:nth-child(3) {
+            border-radius: 24px 24px 6px 6px;
+        }
+        .contact-info-card:nth-child(4) {
+            border-radius: 6px 6px 24px 24px;
+        }
+
+        .contact-info-card {
+            animation: contactFloat 5s ease-in-out infinite;
+        }
+        .contact-info-card:nth-child(1) { animation-delay: 0s; }
+        .contact-info-card:nth-child(2) { animation-delay: 1.2s; }
+        .contact-info-card:nth-child(3) { animation-delay: 2.4s; }
+        .contact-info-card:nth-child(4) { animation-delay: 3.6s; }
+
+        @keyframes contactFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .contact-info-card:hover {
+            animation: none;
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+        }
+
+        /* Social Links - Varied Shapes */
+        .social-link:nth-child(1) {
+            border-radius: 50px 20px 50px 20px;
+        }
+        .social-link:nth-child(2) {
+            border-radius: 20px 50px 20px 50px;
+        }
+        .social-link:nth-child(3) {
+            border-radius: 50px 50px 20px 20px;
+        }
+        .social-link:nth-child(4) {
+            border-radius: 20px 20px 50px 50px;
+        }
+        .social-link:nth-child(5) {
+            border-radius: 40px 15px 40px 15px;
+        }
+        .social-link:nth-child(6) {
+            border-radius: 15px 40px 15px 40px;
+        }
+        .social-link:nth-child(7) {
+            border-radius: 50px 25px 50px 25px;
+        }
+
+        .social-link {
+            animation: socialPulse 4s ease-in-out infinite;
+        }
+        .social-link:nth-child(1) { animation-delay: 0s; }
+        .social-link:nth-child(2) { animation-delay: 0.5s; }
+        .social-link:nth-child(3) { animation-delay: 1s; }
+        .social-link:nth-child(4) { animation-delay: 1.5s; }
+        .social-link:nth-child(5) { animation-delay: 2s; }
+        .social-link:nth-child(6) { animation-delay: 2.5s; }
+        .social-link:nth-child(7) { animation-delay: 3s; }
+
+        @keyframes socialPulse {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .social-link:hover {
+            animation: none;
+        }
+
+        /* Scroll indicator removal cleanup */
+        
+
     </style>
 </head>
 <body>
-
-    <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
-
-    <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
-
-    <!-- Particles Canvas -->
     <canvas id="particles-canvas"></canvas>
-
-    <!-- Navigation -->
     <nav id="navbar">
-        <div class="logo"><span class="logo-text">BLX</span></div>
-        <ul class="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-left">
+            <div class="logo"><span class="logo-text">BLX</span></div>
+        </div>
+        <div class="nav-center">
+            <a href="#about" class="nav-profile">
+                <img src="photo_2026-07-02_21-26-43.jpg" alt="Belal Mohamed Hassan" class="nav-profile-img">
+                <span class="nav-profile-name">Belal</span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
         <button class="mobile-menu-btn">☰</button>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-glow"></div>
         <div class="hero-content">
-            <div class="hero-badge">Technology · Information · AI</div>
+
             <h1>
                 <span class="name">Belal Mohamed Hassan</span>
                 <span class="brand">BLX</span>
@@ -1008,13 +1283,7 @@
                 <a href="#services" class="btn btn-secondary">Explore Services</a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
-
-    <!-- Marquee -->
     <div class="marquee-section">
         <div class="marquee-track">
             <div class="marquee-item"><span class="dot"></span> Artificial Intelligence</div>
@@ -1039,8 +1308,6 @@
             <div class="marquee-item"><span class="dot"></span> Blockchain</div>
         </div>
     </div>
-
-    <!-- About Section -->
     <section class="about" id="about">
         <div class="section-header reveal">
             <span class="section-tag">About Me</span>
@@ -1057,8 +1324,8 @@
             <div class="about-content reveal reveal-delay-2">
                 <h3>Belal Mohamed Hassan</h3>
                 <p>I am a technology visionary and AI architect operating under the brand <strong style="color: var(--accent);">BLX</strong>. My work lives at the intersection of cutting-edge technology, robust information systems, and transformative artificial intelligence.</p>
-                <p>From designing enterprise-grade data architectures to deploying production-ready machine learning models, I bring deep technical mastery combined with strategic business insight. I don't just write code — I engineer systems that think, learn, and evolve.</p>
-                <p>Whether guiding a digital transformation, building an AI-powered product, or architecting resilient cloud infrastructure — I deliver solutions that don't just work, they <em>excel</em>.</p>
+                <p>From designing enterprise-grade data architectures to deploying production-ready machine learning models, I bring deep technical mastery combined with strategic business insight. I do not just write code — I engineer systems that think, learn, and evolve.</p>
+                <p>Whether guiding a digital transformation, building an AI-powered product, or architecting resilient cloud infrastructure — I deliver solutions that do not just work, they <em>excel</em>.</p>
                 <div class="stats">
                     <div class="stat-item">
                         <h4 class="counter" data-target="10">0</h4>
@@ -1076,8 +1343,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="section-header reveal">
             <span class="section-tag">What I Do</span>
@@ -1123,8 +1388,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Expertise Section -->
     <section class="expertise" id="expertise">
         <div class="section-header reveal">
             <span class="section-tag">Core Skills</span>
@@ -1132,22 +1395,21 @@
             <p class="section-desc">A deep, battle-tested toolkit spanning the full technology and AI stack.</p>
         </div>
         <div class="expertise-grid">
-            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>Machine Learning & Deep Learning</span></div>
-            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Natural Language Processing</span></div>
-            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Computer Vision & Image Recognition</span></div>
-            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>Python, TensorFlow, PyTorch</span></div>
-            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Cloud Architecture (AWS, Azure, GCP)</span></div>
-            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Database Design & Optimization</span></div>
-            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>Data Engineering & ETL Pipelines</span></div>
-            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>API Development & Microservices</span></div>
-            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>DevOps, Docker & Kubernetes</span></div>
-            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>Business Intelligence & Analytics</span></div>
-            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Cybersecurity & Data Protection</span></div>
-            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Strategic Technology Consulting</span></div>
+            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>App Design</span></div>
+            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Web Design</span></div>
+            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Media Buying</span></div>
+            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>Advertising</span></div>
+            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>AI Automation</span></div>
+            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>AI Video Creation</span></div>
+            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>AI Content Creation</span></div>
+            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Marketing</span></div>
+            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Editing</span></div>
+            <div class="expertise-item reveal reveal-delay-1"><div class="expertise-dot"></div><span>UI/UX Design</span></div>
+            <div class="expertise-item reveal reveal-delay-2"><div class="expertise-dot"></div><span>Brand Strategy</span></div>
+            <div class="expertise-item reveal reveal-delay-3"><div class="expertise-dot"></div><span>Social Media Management</span></div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="section-header reveal">
             <span class="section-tag">Get In Touch</span>
@@ -1156,11 +1418,64 @@
         <div class="contact-content reveal">
             <h3>Ready to innovate?</h3>
             <p>Whether you have a project in mind, need strategic guidance, or want to explore AI opportunities — I am ready to connect and create something extraordinary together.</p>
-            <div class="contact-links">
-                <a href="mailto:belal@blx.tech" class="contact-link">📧 belal@blx.tech</a>
-                <a href="#" class="contact-link">💼 LinkedIn</a>
-                <a href="#" class="contact-link">🐙 GitHub</a>
-                <a href="#" class="contact-link">🐦 Twitter / X</a>
+            <div class="contact-info-grid">
+
+                <div class="contact-info-card reveal reveal-delay-2">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                    <h4>Email Addresses</h4>
+                    <a href="mailto:belalbmh@gmail.com">belalbmh@gmail.com</a>
+
+                </div>
+                <div class="contact-info-card whatsapp-card reveal reveal-delay-3">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.54 14.49c-.23.65-1.33 1.24-1.86 1.32-.49.07-.98.22-3.28-.68-2.77-1.08-4.55-3.92-4.69-4.1-.14-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.01.96-2.29.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17 0 .4-.06.62.47.23.54.79 1.87.86 2 .08.14.13.3.02.49-.1.19-.16.31-.31.48-.15.17-.32.37-.45.5-.15.15-.3.31-.13.61.17.3.76 1.25 1.62 2.02 1.11 1 2.05 1.31 2.34 1.45.29.14.46.12.63-.07.17-.19.73-.85.92-1.14.19-.29.38-.24.63-.14.25.1 1.6.75 1.87.89.28.14.46.21.53.33.07.11.07.64-.16 1.29z"/></svg>
+                    </div>
+                    <h4>WhatsApp Direct</h4>
+                    <a href="https://wa.me/201003240190" target="_blank">+20 100 324 0190</a>
+                    <a href="https://wa.me/201507794978" target="_blank">+20 150 779 4978</a>
+                    <span class="badge badge-whatsapp">💬 Message Now</span>
+                </div>
+                <div class="contact-info-card reveal reveal-delay-1">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </div>
+                    <h4>Telegram</h4>
+                    <a href="https://t.me/+201003240190" target="_blank">+20 100 324 0190</a>
+                    <a href="https://t.me/+201507794978" target="_blank">+20 150 779 4978</a>
+                    <span class="badge badge-telegram">✈️ Telegram</span>
+                </div>
+            </div>
+            <div class="social-links-bar">
+                <a href="https://www.instagram.com/mahemadbelal?igsh=cTJyaGg3MHU4bXc1" target="_blank" class="social-link instagram reveal reveal-delay-1">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                    Instagram
+                </a>
+                <a href="https://www.facebook.com/share/197ZTJe68a/" target="_blank" class="social-link facebook reveal reveal-delay-2">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://www.tiktok.com/@belal.mahemad4?_r=1&_t=ZS-97hhO6VVH8c" target="_blank" class="social-link tiktok reveal reveal-delay-3">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    TikTok
+                </a>
+                <a href="https://wa.me/201003240190" target="_blank" class="social-link whatsapp reveal reveal-delay-1">
+                    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.54 14.49c-.23.65-1.33 1.24-1.86 1.32-.49.07-.98.22-3.28-.68-2.77-1.08-4.55-3.92-4.69-4.1-.14-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.01.96-2.29.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17 0 .4-.06.62.47.23.54.79 1.87.86 2 .08.14.13.3.02.49-.1.19-.16.31-.31.48-.15.17-.32.37-.45.5-.15.15-.3.31-.13.61.17.3.76 1.25 1.62 2.02 1.11 1 2.05 1.31 2.34 1.45.29.14.46.12.63-.07.17-.19.73-.85.92-1.14.19-.29.38-.24.63-.14.25.1 1.6.75 1.87.89.28.14.46.21.53.33.07.11.07.64-.16 1.29z"/></svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:belalbmh@gmail.com" class="social-link email reveal reveal-delay-2">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Email
+                </a>
+                <a href="tel:+201003240190" class="social-link phone reveal reveal-delay-3">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    Call
+                </a>
+                <a href="https://t.me/+201003240190" target="_blank" class="social-link telegram reveal reveal-delay-1">
+                    <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    Telegram
+                </a>
             </div>
             <form class="contact-form" onsubmit="event.preventDefault(); this.reset(); alert('Thank you for reaching out! I will get back to you soon.');">
                 <div class="form-group">
@@ -1183,8 +1498,6 @@
             </form>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
         <div class="footer-brand">BLX</div>
         <p>Belal Mohamed Hassan — Technology · Information · AI</p>
@@ -1198,19 +1511,16 @@
     </footer>
 
     <script>
-        // ===== PARTICLES SYSTEM =====
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         let mouseX = 0, mouseY = 0;
-
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -1227,8 +1537,6 @@
                 if (this.x < 0) this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
                 if (this.y < 0) this.y = canvas.height;
-
-                // Mouse interaction
                 const dx = mouseX - this.x;
                 const dy = mouseY - this.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
@@ -1245,7 +1553,6 @@
                 ctx.fill();
             }
         }
-
         function initParticles() {
             particles = [];
             const count = window.innerWidth < 768 ? 50 : 120;
@@ -1254,14 +1561,12 @@
             }
         }
         initParticles();
-
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
                 p.update();
                 p.draw();
             });
-            // Draw connections
             particles.forEach((p1, i) => {
                 particles.slice(i + 1).forEach(p2 => {
                     const dx = p1.x - p2.x;
@@ -1280,16 +1585,12 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
-
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
-
-        // ===== CUSTOM CURSOR =====
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
-
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX - 10 + 'px';
             cursor.style.top = e.clientY - 10 + 'px';
@@ -1298,8 +1599,7 @@
                 cursorFollower.style.top = e.clientY - 4 + 'px';
             }, 50);
         });
-
-        document.querySelectorAll('a, button, .service-card, .expertise-item, .contact-link').forEach(el => {
+        document.querySelectorAll('a, button, .service-card, .expertise-item, .social-link, .contact-info-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.classList.add('hover');
                 cursorFollower.classList.add('hover');
@@ -1309,8 +1609,6 @@
                 cursorFollower.classList.remove('hover');
             });
         });
-
-        // ===== SCROLL PROGRESS =====
         const scrollProgress = document.querySelector('.scroll-progress');
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
@@ -1318,8 +1616,6 @@
             const progress = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = progress + '%';
         });
-
-        // ===== TYPING EFFECT =====
         const typingText = document.getElementById('typing-text');
         const phrases = [
             'AI Architect & Engineer',
@@ -1331,7 +1627,6 @@
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
-
         function typeEffect() {
             const currentPhrase = phrases[phraseIndex];
             if (isDeleting) {
@@ -1341,7 +1636,6 @@
                 typingText.textContent = currentPhrase.substring(0, charIndex + 1);
                 charIndex++;
             }
-
             let typeSpeed = isDeleting ? 50 : 100;
             if (!isDeleting && charIndex === currentPhrase.length) {
                 typeSpeed = 2000;
@@ -1354,8 +1648,6 @@
             setTimeout(typeEffect, typeSpeed);
         }
         typeEffect();
-
-        // ===== NAVBAR SCROLL =====
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -1364,8 +1656,6 @@
                 navbar.classList.remove('scrolled');
             }
         });
-
-        // ===== ACTIVE NAV LINK =====
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
@@ -1383,8 +1673,6 @@
                 }
             });
         });
-
-        // ===== REVEAL ON SCROLL =====
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1392,10 +1680,7 @@
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        // ===== COUNTER ANIMATION =====
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1418,10 +1703,7 @@
                 }
             });
         }, { threshold: 0.5 });
-
         document.querySelectorAll('.counter').forEach(counter => counterObserver.observe(counter));
-
-        // ===== SERVICE CARD MOUSE GLOW =====
         document.querySelectorAll('.service-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -1431,8 +1713,6 @@
                 card.style.setProperty('--mouse-y', y + '%');
             });
         });
-
-        // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1442,6 +1722,77 @@
                 }
             });
         });
+    </script>
+
+    
+
+    
+
+    <script>
+    // AI Mouse Glow Effect - Characters light up near cursor
+    (function() {
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        if (isTouchDevice) return;
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .glow-text span {
+                display: inline-block;
+                transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+                cursor: default;
+            }
+            .glow-text span:hover {
+                transform: scale(1.4) translateY(-4px);
+                color: var(--accent) !important;
+                text-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.4), 0 0 60px rgba(112, 0, 255, 0.2);
+            }
+            /* BLX brand - NO glow effect anywhere */
+            .brand, .brand span, .logo-text, .logo-text span, .footer-brand, .footer-brand span {
+                pointer-events: none !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        function wrapTextInElement(element) {
+            if (element.dataset.glowWrapped) return;
+            element.dataset.glowWrapped = 'true';
+
+            const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.trim().length > 0 && node.parentNode.tagName !== 'SCRIPT') {
+                    textNodes.push(node);
+                }
+            }
+
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                const text = textNode.textContent;
+                const fragment = document.createDocumentFragment();
+
+                for (let i = 0; i < text.length; i++) {
+                    if (text[i] === ' ') {
+                        fragment.appendChild(document.createTextNode(' '));
+                    } else {
+                        const span = document.createElement('span');
+                        span.textContent = text[i];
+                        fragment.appendChild(span);
+                    }
+                }
+                parent.replaceChild(fragment, textNode);
+            });
+        }
+
+        // Apply to key text elements ONLY (NO hero h1, NO BLX brand anywhere)
+        const targets = document.querySelectorAll('.section-title, .about-content h3, .service-card h3, .contact-content h3');
+        targets.forEach(el => {
+            el.classList.add('glow-text');
+            wrapTextInElement(el);
+        });
+    })();
     </script>
 </body>
 </html>
